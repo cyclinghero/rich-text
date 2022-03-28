@@ -1,6 +1,6 @@
 {
-  "name": "@contentful/rich-text-from-markdown",
-  "version": "15.12.0",
+  "name": "@markmulder/rich-text-from-markdown",
+  "version": "15.12.1",
   "description": "convert markdown to rich text",
   "keywords": [
     "rich-text",
@@ -35,7 +35,7 @@
   "dependencies": {
     "@contentful/rich-text-types": "^15.12.0",
     "lodash": "^4.17.11",
-    "remark-parse": "^6.0.3",
+    "remark-parse": "^10.0.1",
     "unified": "^7.1.0"
   },
   "devDependencies": {
@@ -56,6 +56,5 @@
   },
   "bugs": {
     "url": "https://github.com/contentful/rich-text/issues"
-  },
-  "gitHead": "c7e34bc0f0172728999b121af43df88995eec305"
+  }
 }
