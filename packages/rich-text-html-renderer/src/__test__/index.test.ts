@@ -1,5 +1,5 @@
 import cloneDeep from 'lodash/cloneDeep';
-import { Block, BLOCKS, Document, INLINES, MARKS } from '@contentful/rich-text-types';
+import { Block, BLOCKS, Document, INLINES, MARKS, ResourceLink } from '@contentful/rich-text-types';
 import { documentToHtmlString, Options } from '../index';
 import {
   embeddedEntryDoc,
@@ -15,6 +15,7 @@ import {
   quoteDoc,
   ulDoc,
   tableWithHeaderDoc,
+  embeddedResourceDoc,
 } from './documents';
 import inlineEntity from './documents/inline-entity';
 
@@ -68,6 +69,14 @@ describe('documentToHtmlString', () => {
         doc: marksDoc(MARKS.CODE),
         expected: '<p><code>hello world</code></p>',
       },
+      {
+        doc: marksDoc(MARKS.SUPERSCRIPT),
+        expected: '<p><sup>hello world</sup></p>',
+      },
+      {
+        doc: marksDoc(MARKS.SUBSCRIPT),
+        expected: '<p><sub>hello world</sub></p>',
+      },
     ];
 
     docs.forEach(({ doc, expected }) => {
@@ -90,7 +99,7 @@ describe('documentToHtmlString', () => {
   it('renders marks with the passed custom mark rendered', () => {
     const options: Options = {
       renderMark: {
-        [MARKS.UNDERLINE]: text => `<u>${text}</u>`,
+        [MARKS.UNDERLINE]: (text) => `<u>${text}</u>`,
       },
     };
     const document: Document = marksDoc(MARKS.UNDERLINE);
@@ -170,6 +179,20 @@ describe('documentToHtmlString', () => {
       },
     };
     const document: Document = embeddedEntryDoc(entrySys);
+    const expected = `<div></div>`;
+
+    expect(documentToHtmlString(document)).toEqual(expected);
+  });
+
+  it('renders default resource link block', () => {
+    const resourceLink: ResourceLink = {
+      sys: {
+        urn: 'crn:contentful:::content:spaces/6fqi4ljzyr0e/entries/9mpxT4zsRi6Iwukey8KeM',
+        type: 'ResourceLink',
+        linkType: 'Contentful:Entry',
+      },
+    };
+    const document: Document = embeddedResourceDoc(resourceLink);
     const expected = `<div></div>`;
 
     expect(documentToHtmlString(document)).toEqual(expected);

@@ -143,6 +143,7 @@ documentToHtmlString(document, options);
 The `renderNode` keys should be one of the following `BLOCKS` and `INLINES` properties as defined in [`@contentful/rich-text-types`](https://www.npmjs.com/package/@contentful/rich-text-types):
 
 - `BLOCKS`
+
   - `DOCUMENT`
   - `PARAGRAPH`
   - `HEADING_1`
@@ -158,6 +159,7 @@ The `renderNode` keys should be one of the following `BLOCKS` and `INLINES` prop
   - `HR`
   - `EMBEDDED_ENTRY`
   - `EMBEDDED_ASSET`
+  - `EMBEDDED_RESOURCE`
 
 - `INLINES`
   - `EMBEDDED_ENTRY` (this is different from the `BLOCKS.EMBEDDED_ENTRY`)
@@ -171,3 +173,5 @@ The `renderMark` keys should be one of the following `MARKS` properties as defin
 - `ITALIC`
 - `UNDERLINE`
 - `CODE`
+- `SUPERSCRIPT`
+- `SUBSCRIPT`

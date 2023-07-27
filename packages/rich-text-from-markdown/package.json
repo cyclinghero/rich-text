@@ -1,6 +1,6 @@
 {
   "name": "@markmulder/rich-text-from-markdown",
-  "version": "15.12.1",
+  "version": "15.16.6",
   "description": "convert markdown to rich text",
   "keywords": [
     "rich-text",
@@ -30,13 +30,15 @@
     "prebuild": "rimraf dist",
     "build": "tsc --module commonjs && rollup -c rollup.config.js",
     "start": "tsc && rollup -c rollup.config.js -w",
-    "lint": "tslint -t codeFrame '@(src|bin)/*.ts'"
+    "lint": "tslint -t codeFrame '@(src|bin)/*.ts'",
+    "test": "jest"
   },
   "dependencies": {
-    "@contentful/rich-text-types": "^15.12.0",
+    "@contentful/rich-text-types": "^16.2.0",
     "lodash": "^4.17.11",
+    "remark-gfm": "^1.0.0",
     "remark-parse": "^10.0.1",
-    "unified": "^7.1.0"
+    "unified": "^9.0.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.172",

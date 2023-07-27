@@ -40,6 +40,12 @@ Array [
 ]
 `;
 
+exports[`documentToReactComponents renders default resource block 1`] = `
+Array [
+  <div />,
+]
+`;
+
 exports[`documentToReactComponents renders embedded entry 1`] = `
 Array [
   <p>
@@ -140,6 +146,26 @@ Array [
     <code>
       hello world
     </code>
+  </p>,
+]
+`;
+
+exports[`documentToReactComponents renders marks with default mark renderer 5`] = `
+Array [
+  <p>
+    <sup>
+      hello world
+    </sup>
+  </p>,
+]
+`;
+
+exports[`documentToReactComponents renders marks with default mark renderer 6`] = `
+Array [
+  <p>
+    <sub>
+      hello world
+    </sub>
   </p>,
 ]
 `;

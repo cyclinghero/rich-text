@@ -1,5 +1,5 @@
 import React, { ReactNode, ReactNodeArray } from 'react';
-import { BLOCKS, Document, INLINES, MARKS } from '@contentful/rich-text-types';
+import { BLOCKS, Document, INLINES, MARKS, ResourceLink } from '@contentful/rich-text-types';
 
 import { CommonNode, documentToReactComponents, Options } from '..';
 
@@ -25,6 +25,7 @@ import Paragraph from './components/Paragraph';
 import Strong from './components/Strong';
 import { appendKeyToValidElement } from '../util/appendKeyToValidElement';
 import { nodeListToReactComponents, nodeToReactComponent } from '../util/nodeListToReactComponents';
+import embeddedResource from './documents/embedded-resource';
 
 describe('documentToReactComponents', () => {
   it('returns an empty array when given an empty document', () => {
@@ -51,7 +52,7 @@ describe('documentToReactComponents', () => {
       headingDoc(BLOCKS.HEADING_2),
     ];
 
-    docs.forEach(doc => {
+    docs.forEach((doc) => {
       expect(documentToReactComponents(doc)).toMatchSnapshot();
     });
   });
@@ -62,9 +63,11 @@ describe('documentToReactComponents', () => {
       marksDoc(MARKS.BOLD),
       marksDoc(MARKS.UNDERLINE),
       marksDoc(MARKS.CODE),
+      marksDoc(MARKS.SUPERSCRIPT),
+      marksDoc(MARKS.SUBSCRIPT),
     ];
 
-    docs.forEach(doc => {
+    docs.forEach((doc) => {
       expect(documentToReactComponents(doc)).toMatchSnapshot();
     });
   });
@@ -94,7 +97,7 @@ describe('documentToReactComponents', () => {
   it('renders marks with the passed custom mark renderer', () => {
     const options: Options = {
       renderMark: {
-        [MARKS.BOLD]: text => <Strong>{text}</Strong>,
+        [MARKS.BOLD]: (text) => <Strong>{text}</Strong>,
       },
     };
     const document: Document = multiMarkDoc();
@@ -104,7 +107,7 @@ describe('documentToReactComponents', () => {
 
   it('renders text with the passed custom text renderer', () => {
     const options: Options = {
-      renderText: text => text.replace(/world/, 'Earth'),
+      renderText: (text) => text.replace(/world/, 'Earth'),
     };
     const document: Document = paragraphDoc;
 
@@ -132,6 +135,19 @@ describe('documentToReactComponents', () => {
       },
     };
     const document: Document = embeddedEntryDoc(entrySys);
+
+    expect(documentToReactComponents(document)).toMatchSnapshot();
+  });
+
+  it('renders default resource block', () => {
+    const resourceSys: ResourceLink = {
+      sys: {
+        urn: 'crn:contentful:::content:spaces/6fqi4ljzyr0e/entries/9mpxT4zsRi6Iwukey8KeM',
+        type: 'ResourceLink',
+        linkType: 'Contentful:Entry',
+      },
+    };
+    const document: Document = embeddedResource(resourceSys);
 
     expect(documentToReactComponents(document)).toMatchSnapshot();
   });
